@@ -1,6 +1,6 @@
 # Twitter-RandNum-Bot
 Twitterに **1〜140桁のランダムな数字** を定期的に投稿するBOTです。  
-
+アカウント: https://x.com/ryo_sub001339  
 ---
 
 ## 🚀 機能

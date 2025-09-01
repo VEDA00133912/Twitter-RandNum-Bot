@@ -3,7 +3,9 @@ import time
 import random
 import os
 import tweepy
+import threading
 from dotenv import load_dotenv
+from bottle import route, run
 
 load_dotenv()
 
@@ -25,10 +27,21 @@ def post_random_number():
     except Exception as e:
         print("❌ error:", e)
 
+# 起動時に1回ツイート
 post_random_number()
 
 schedule.every(90).minutes.do(post_random_number)
 
-while True:
-    schedule.run_pending()
-    time.sleep(30)
+def run_scheduler():
+    while True:
+        schedule.run_pending()
+        time.sleep(30)
+
+threading.Thread(target=run_scheduler, daemon=True).start()
+
+@route('/')
+def home():
+    return "Hello, World!"
+
+if __name__ == "__main__":
+    run(host="0.0.0.0", port=5000, debug=True)
